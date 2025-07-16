@@ -39,10 +39,19 @@ const Partnership = () => {
               Partner with us to bring innovative healthcare solutions to communities that need them most. 
               Together, we can make healthcare accessible, equitable, and effective for everyone.
             </p>
-            <button className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl">
-              <Handshake className="mr-2 h-5 w-5" />
-              Become a Partner
-            </button>
+            <button
+  onClick={() => {
+    const contactSection = document.getElementById("contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+  className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+>
+  <Handshake className="mr-2 h-5 w-5" />
+  Become a Partner
+</button>
+
           </div>
         </div>
       </div>

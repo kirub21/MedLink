@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, MapPin, Phone, Send, Facebook, Linkedin, Twitter } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { useRef } from 'react';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -16,15 +18,30 @@ const Contact = () => {
       [name]: value
     }));
   };
+const formRef = useRef<HTMLFormElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({ name: '', email: '', organization: '', message: '' });
-    alert('Thank you for your message! We\'ll get back to you soon.');
-  };
+  e.preventDefault();
+
+  if (formRef.current) {
+    emailjs.sendForm(
+  import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  formRef.current,
+  import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+)
+
+      .then(() => {
+        alert("Thank you for your message! We'll get back to you soon.");
+        setFormData({ name: '', email: '', organization: '', message: '' });
+      })
+      .catch((error) => {
+        console.error("EmailJS error:", error);
+        alert("Oops! Something went wrong. Please try again later.");
+      });
+  }
+};
+
 
   return (
     <section id="contact" className="py-20 bg-white">
@@ -40,7 +57,7 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-gradient-to-br from-blue-50 to-sky-50 rounded-xl p-8 border border-blue-100">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
@@ -117,14 +134,14 @@ const Contact = () => {
                   <Mail className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Email</h4>
-                    <p className="text-gray-600">info@medlink.healthcare</p>
+                    <p className="text-gray-600">info@medlink.et</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
                   <Phone className="h-6 w-6 text-blue-600 mt-1" />
                   <div>
                     <h4 className="font-semibold text-gray-900">Phone</h4>
-                    <p className="text-gray-600">+251 11 123 4567</p>
+                    <p className="text-gray-600">+251907081737</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">

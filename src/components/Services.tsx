@@ -1,5 +1,5 @@
 import React from 'react';
-import { Database, Brain, GraduationCap, MessageSquare, Shield } from 'lucide-react';
+import { Database, Brain, GraduationCap, MessageSquare, Ambulance ,Shield } from 'lucide-react';
 
 const Services = () => {
   const services = [
@@ -27,7 +27,12 @@ const Services = () => {
       icon: <Shield className="h-8 w-8 text-blue-600" />,
       title: "Blockchain-Based Microinsurance Integration",
       description: "Transparent, localized microinsurance systems tailored for low-income, underserved communities."
-    }
+    },
+    {
+    icon: <Ambulance className="h-8 w-8 text-blue-600" />,
+    title: "Mobile Clinic Design & Implementation",
+    description: "Customizable mobile health units designed to deliver essential services directly to remote populations."
+  }
   ];
 
   return (

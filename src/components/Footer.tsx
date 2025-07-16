@@ -4,13 +4,23 @@ import { Stethoscope, Mail, Send } from 'lucide-react';
 const Footer = () => {
   const [email, setEmail] = useState('');
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle newsletter subscription
-    console.log('Newsletter subscription:', email);
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    await fetch(import.meta.env.VITE_SUBSCRIBE_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ email })
+    });
+    alert("Thank you for subscribing!");
     setEmail('');
-    alert('Thank you for subscribing to our newsletter!');
-  };
+  } catch (error) {
+    console.error("Spreadsheet error:", error);
+    alert("Oops! Something went wrong.");
+  }
+};
+
 
   return (
     <footer className="bg-gray-900 text-white py-16">

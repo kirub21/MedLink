@@ -6,18 +6,21 @@ const Hero = () => {
   const [showFeedback, setShowFeedback] = useState(false);
 
   const handleWatchDemo = () => {
-    setShowDemo(true);
-    // Simulate demo completion after 3 seconds
-    setTimeout(() => {
-      setShowDemo(false);
-      setShowFeedback(true);
-    }, 3000);
-  };
+  setShowDemo(true);
+  // Simulate demo completion after 6 minutes 22 seconds (382,000 ms)
+  setTimeout(() => {
+    setShowDemo(false);
+    setShowFeedback(true);
+  }, 402000);
+};
+
 
   const handleGetDemo = () => {
-    // Simulate form submission
-    setShowFeedback(true);
-  };
+  const contactSection = document.getElementById("contact");
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
   return (
     <section id="home" className="min-h-screen bg-gradient-to-br from-blue-50 to-sky-50 flex items-center">
@@ -69,42 +72,49 @@ const Hero = () => {
       </div>
 
       {/* Demo Modal */}
-      {showDemo && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md mx-4">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <h3 className="text-xl font-semibold mb-2">Loading Demo...</h3>
-              <p className="text-gray-600">Please wait while we prepare the demonstration.</p>
-            </div>
-          </div>
-        </div>
-      )}
+     {showDemo && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg p-8 max-w-2xl mx-4">
+      <div className="text-center">
+        <iframe
+          width="100%"
+          height="315"
+          src="https://www.youtube.com/embed/9dnfW2dIZYY"
+          title="Medlink Demo"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="rounded-lg"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+)}
 
-      {/* Feedback Modal */}
+
       {showFeedback && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md mx-4">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-semibold">Thank you!</h3>
-              <button onClick={() => setShowFeedback(false)} className="text-gray-500 hover:text-gray-700">
-                <X size={24} />
-              </button>
-            </div>
-            <p className="text-gray-600 mb-6">
-              🎉 Thank you for watching! We'd love to hear your feedback.
-            </p>
-            <a
-              href="#contact"
-              onClick={() => setShowFeedback(false)}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200 text-center block"
-            >
-              Share Feedback
-            </a>
-          </div>
-        </div>
-      )}
-    </section>
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="bg-white rounded-lg p-8 max-w-2xl mx-4 w-full">
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-xl font-semibold">Thank you!</h3>
+        <button onClick={() => setShowFeedback(false)} className="text-gray-500 hover:text-gray-700">
+          <X size={24} />
+        </button>
+      </div>
+      <p className="text-gray-600 mb-4">
+        🎉 We'd love to hear your feedback. Please fill out the form below.
+      </p>
+      <iframe
+        src="https://ee.kobotoolbox.org/i/GHubGxjR"
+        width="100%"
+        height="600"
+        className="rounded-lg border border-gray-300"
+        title="Medlink Feedback Form"
+      ></iframe>
+    </div>
+  </div>
+)}
+  </section>
   );
 };
 
